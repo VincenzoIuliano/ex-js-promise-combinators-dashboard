@@ -1,5 +1,6 @@
 async function getDashboardData(query) {
-    console.log(`Carico la query di ${query}`);
+    try{
+        console.log(`Carico la query di ${query}`);
 
     const destinationPromise = fetch(`https://freetestapi.com/api/v1/destinations?search=${query}`).then( res => res.json())
     const weathersPromise = fetch(`https://freetestapi.com/api/v1/weathers?search=${query}`).then( res => res.json())
@@ -19,6 +20,9 @@ async function getDashboardData(query) {
         temperature: weathers[0].temperature,
         weather: weathers[0].weather_description,
         airport: airports[0].name
+    }
+    }catch(error) {
+        error => console.error(error)
     }
 }
 
